@@ -3,7 +3,7 @@
 
 #include<stdio.h>
 #include<stdlib.h>
-#include<string.h>
+#include<string.h> 
 
 typedef struct Atom Atom;
 struct Atom {
@@ -11,6 +11,14 @@ float x;
 float y;
 float z;
 };
+
+typedef struct arrayPDB arrayPDB;
+struct arrayPDB {
+int numAtom;
+int numCAAtom;
+Atom *CA;
+};
+
 typedef struct Bond Bond;
 struct Bond {
 Atom start;
