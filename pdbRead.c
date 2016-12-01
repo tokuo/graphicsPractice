@@ -1,16 +1,11 @@
 #include"PDB.h"
-
 void arrayPDBRead(FILE* fpt, arrayPDB *pdb){
  int a=0,b=0;
  char readLine[80];
- char check1[] = "Atom";
+ char check1[] = "ATOM";
  char check2[] = "CA";
- char *c,*c2,*c3,*c4;
- int i,i2;
- double f1,f2,f3;
- double x,y,z;
+ char cx[8],cy[8],cz[8];
  while(fgets(readLine,256,fpt)!=NULL){
-  puts(readLine);
   if(strstr(readLine,check1)!=NULL){
    a++;
    if(strstr(readLine,check2)!=NULL){
@@ -23,15 +18,27 @@ void arrayPDBRead(FILE* fpt, arrayPDB *pdb){
  fseek(fpt,0L,SEEK_SET);
  pdb->CA = (Atom *)malloc(sizeof(Atom)*pdb->numCAAtom);
  a = 0;
- while(fgets(readLine,80,fpt)!=NULL){
+ int i=30,j=0;
+ while(fgets(readLine,256,fpt)!=NULL){
   if(strstr(readLine,check1)!=NULL){
    if(strstr(readLine,check2)!=NULL){
-    fseek(fpt,-1L,SEEK_SET);
-    fscanf(fpt,"%s %d %s %s %d %lf %lf %lf %lf %lf %s %lf",c,&i,c2,c3,&i2,&x,&y,&z,&f1,&f2,c4,&f3);
-    pdb->CA[a].x = x;
-    pdb->CA[a].y = y;
+    i=30;
+    for(j=0;j<=7;j++){
+      cx[j] = readLine[i];
+      i++;
+    }i++;
+    for(j=0;j<=7;j++){
+      cy[j] = readLine[i];
+      i++;
+    }i++;
+    for(j=0;j<=7;j++){
+      cz[j] = readLine[i];
+      i++;
+    }
+    pdb->CA[a].x = atof(cx);
+    pdb->CA[a].y = atof(cy);
+    a++;
    }
   }
-  a++;
  }
 }
