@@ -1,11 +1,12 @@
 #include"PDB.h"
 
-
+// input List
 void pdbRead(FILE* fpt, PDB *pdb){
  char readLine[80];
  char check1[] = "ATOM";
  char check2[] = "CA";
  char cx[8],cy[8],cz[8];
+ char resNumber[4],tempFactor[6],occupancy[5];
  int i=30,j=0;
  pdb->numAtom = 0;
  pdb->numCA = 0;
@@ -45,6 +46,40 @@ void pdbRead(FILE* fpt, PDB *pdb){
 */
     pdb->currentCA->atom.x = atof(cx);
     pdb->currentCA->atom.y = atof(cy);
+    // extension part
+    i=17;
+    for(j=0;j<4;j++){
+     pdb->current->atom.resName[j] = readLine[i];
+     i++;
+    }
+    i=22;
+    for(j=0;j<4;j++){
+     resNumber[j] = readLine[i];
+     i++;
+    }
+    pdb->current->atom.resNumber = atoi(resNumber);
+    i=61;
+    for(j=0;j<6;j++){
+     tempFactor[j] = readLine[i];
+     i++;
+    }
+    pdb->current->atom.tempFactor = atof(tempFactor);
+    i=55;
+    for(j=0;j<5;j++){
+     occupancy[j] = readLine[i];
+     i++;
+    }
+    pdb->current->atom.occupancy = atof(occupancy);
+    i=12;
+    for(j=0;j<5;j++){
+     pdb->current->atom.atomName[j] = readLine[i];
+     i++;
+    }
+    i=76;
+    for(j=0;j<3;j++){
+     pdb->current->atom.element[j] = readLine[i];
+     i++;
+    }
    }
   }
  }
@@ -53,6 +88,7 @@ void pdbRead(FILE* fpt, PDB *pdb){
 }
 
 
+// input array
 void arrayPDBRead(FILE* fpt, arrayPDB *pdb){
  int a=0,b=0;
  char readLine[80];
