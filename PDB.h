@@ -10,6 +10,12 @@ struct Atom {
 float x;
 float y;
 float z;
+char resName[4];
+int resNumber;
+float tempFactor;
+float occupancy;
+char atomName[5];
+char element[3];
 };
 
 typedef struct arrayPDB arrayPDB;
@@ -36,6 +42,10 @@ typedef struct PDB PDB;
 struct PDB {
 int numAtom;
 int numCA;
+Atom Center;
+float maxRadius;
+Atom min;
+Atom max;
 recordPDB* top;
 recordPDB* topCA;
 recordPDB* current;
