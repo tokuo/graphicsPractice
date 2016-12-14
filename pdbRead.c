@@ -67,7 +67,7 @@ void pdbRead(FILE* fpt, PDB *pdb){
    }
    // extension part
    i=17;
-   for(j=0;j<4;j++){ 
+   for(j=0;j<3;j++){ 
     pdb->current->atom.resName[j] = readLine[i];
     i++;
    }
@@ -95,7 +95,7 @@ void pdbRead(FILE* fpt, PDB *pdb){
     i++;
    }
    i=77;
-   for(j=0;j<3;j++){ 
+   for(j=0;j<2;j++){ 
     pdb->current->atom.element[j] = readLine[i];
     i++;
    }
