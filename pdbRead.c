@@ -34,13 +34,11 @@ void pdbRead(FILE* fpt, PDB *pdb){
      i++;
    }
    pdb->current->atom.y = atof(cy);
-/*
    for(j=0;j<=7;j++){
      cz[j] = readLine[i];
      i++;
    }
    pdb->current->atom.z = atof(cz);
-*/
    if(strstr(readLine,check2)!=NULL){
     if(pdb->numCA != 0){
      pdb->currentCA->nextCA = (recordPDB *)malloc(sizeof(recordPDB));
@@ -56,14 +54,13 @@ void pdbRead(FILE* fpt, PDB *pdb){
       cy[j] = readLine[i];
       i++;
     }
-/*
     for(j=0;j<=7;j++){
       cz[j] = readLine[i];
       i++;
     }
-*/
     pdb->currentCA->atom.x = atof(cx);
     pdb->currentCA->atom.y = atof(cy);
+    pdb->currentCA->atom->atom.z = atof(cz);
    }
    // extension part
    i=17;
@@ -147,6 +144,7 @@ void arrayPDBRead(FILE* fpt, arrayPDB *pdb){
 */
     pdb->CA[a].x = atof(cx);
     pdb->CA[a].y = atof(cy);
+    //pdb->CA[a].z = atof(cz);
     a++;
    }
   }
