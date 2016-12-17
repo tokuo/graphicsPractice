@@ -3,7 +3,7 @@
 
 #include<stdio.h>
 #include<stdlib.h>
-#include<string.h> 
+#include<string.h>
 
 typedef struct Atom Atom;
 struct Atom {
@@ -50,10 +50,13 @@ recordPDB* top;
 recordPDB* topCA;
 recordPDB* current;
 recordPDB* currentCA;
-}; 
+};
 
-extern void bondDraw(FILE* fpt, float startx, float starty, float endx, float
-endy);
-extern void bondDraw2(FILE* fpt, Bond l);
 
+// not necessary under this line
+extern void lpdbCenterCalc(PDB* pdb);
+extern void lpdbSizeCalc(PDB* pdb);
+extern void lpdbMinCalc(PDB* pdb);
+extern void lpdbMaxCalc(PDB* pdb);
+extern void lpdbInfoPrint(FILE fpt,PDB* pdb);
 #endif
