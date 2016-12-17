@@ -18,7 +18,7 @@ int main(int argc,char* argv[]){
     printf("write error\n");
     exit(1);
   }
-  lpdbWritebase(fpw,&pdb);
+  lpdbCountElements(fpw,&pdb);
   fclose(fpw);
   return 0;
 }

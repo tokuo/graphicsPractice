@@ -1,8 +1,4 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<math.h>
 #include<ctype.h>
-#include<string.h>
 #include"PDB.h"
 
 void lpdbCenterCalc(PDB* pdb){
@@ -15,8 +11,8 @@ void lpdbCenterCalc(PDB* pdb){
     pdb->Center.y+=pdb->current->atom.y;
     pdb->Center.z+=pdb->current->atom.z;
   }
-  pdb->Center.x=pdb->Center.x/numAtom;
-  pdb->Center.y=pdb->Center.y/numAtom;
-  pdb->Center.z=pdb->Center.z/numAtom;
+  pdb->Center.x=pdb->Center.x/pdb->numAtom;
+  pdb->Center.y=pdb->Center.y/pdb->numAtom;
+  pdb->Center.z=pdb->Center.z/pdb->numAtom;
 
 }

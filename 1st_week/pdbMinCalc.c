@@ -18,7 +18,8 @@ int main(int argc,char* argv[]){
     printf("write error\n");
     exit(1);
   }
-  lpdbWritebase(fpw,&pdb);
+  lpdbMinCalc(&pdb);
+  fprintf(fpw,"center %8.3f %8.3f %8.3f\n",pdb.min.x,pdb.min.y,pdb.min.z);
   fclose(fpw);
   return 0;
 }

@@ -1,23 +1,21 @@
-#include<stdio.h>
-#include<string.h>
 #include "PDB.h"
 
-void numElements(PDB*pdb) {
+void lpdbCountElements(FILE* fpt,PDB* pdb) {
 
-  int i, ne[] = {0, 0, 0, 0, 0, 0};
-  char pse[6][2] = {"C", "H", "N", "O", "P", "X"};
+  int i, ne[6] = {0, 0, 0, 0, 0, 0};
+  char pse[7] = "CHNOPX";
   
-  for(pdb->current = pdb->top; pdb->current != NULL; pdb->current->nextAtom) {
+  for(pdb->current = pdb->top; pdb->current != NULL; pdb->current = pdb->current->nextAtom) {
     for(i = 0; i < 5; i++) {
-      if(strcmp(pdb->current->atom.element, pse[i]) == 0) {
+      if(pdb->current->atom.element[0] == pse[i]) {
 	ne[i]++;
 	break;
       }
+      if(i == 5) ne[5]++;
     }
-    if(i == 5) ne[5]++;
   }
 
   for(i = 0; i < 6; i++) {
-    printf("%s:\t%d\n", pse[i], ne[i]);
+    fprintf(fpt,"%c:\t%d\n", pse[i], ne[i]);
   }
 }

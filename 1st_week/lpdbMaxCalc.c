@@ -1,23 +1,22 @@
-#include<stdio.h>
 #include "PDB.h"
 
-void max(PDB* pdb){
+void lpdbMaxCalc(PDB* pdb){
 
   pdb->current=pdb->top;
-  pdb->max.x=pdb->cyrrent->atom.x;
-  pdb->max.y=pdb->cyrrent->atom.y;
-  pdb->max.z=pdb->cyrrent->atom.z;
+  pdb->max.x=pdb->current->atom.x;
+  pdb->max.y=pdb->current->atom.y;
+  pdb->max.z=pdb->current->atom.z;
 
-  while(pdb->current->nextArom!=NULL){
-    pdb->current=pdb->current->nextAtom;
-    if(pdb->current->atom.x >pdb->min.x){
+  while(pdb->current->nextAtom!=NULL){
+    if(pdb->current->atom.x > pdb->max.x){
       pdb->max.x=pdb->current->atom.x;
     }
-    if(pdb->current->atom.y >pdb->min.y){
+    if(pdb->current->atom.y > pdb->max.y){
       pdb->max.y=pdb->current->atom.y;
     }
-    if(pdb->current->atom.z >pdb->min.z){
+    if(pdb->current->atom.z > pdb->max.z){
       pdb->max.z=pdb->current->atom.z;
     }
+    pdb->current=pdb->current->nextAtom;
   }
 }

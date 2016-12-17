@@ -1,12 +1,10 @@
-#include<stdio.h>
-#include<stdlib.h>
 #include "PDB.h"
 
 int main(int argc, char*argv[]) {
 
   char *pdbfn, *outputfn;
   FILE *fpt;
-  PDB *pdb;
+  PDB pdb;
 
   if(argc != 3) {
     printf("error: Argument is invalid\n");
@@ -22,16 +20,17 @@ int main(int argc, char*argv[]) {
     exit(EXIT_FAILURE);
   }
 
-  pdbRead(fpt, pdb);
+  pdbRead(fpt, &pdb);
   fclose(fpt);
-  lpdbSizeCalc(pdb);
+  lpdbCenterCalc(&pdb);
+  lpdbSizeCalc(&pdb);
 
   if((fpt = fopen(outputfn, "w")) == NULL) {
     printf("error: %s is not opened\n", outputfn);
     exit(EXIT_FAILURE);
   }
 
-  fprintf(fpt, "maxRadius: %f", pdb->maxRadius);
+  fprintf(fpt, "maxRadius: %f", pdb.maxRadius);
   fclose(fpt);
 
   

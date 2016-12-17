@@ -39,32 +39,8 @@ void pdbRead(FILE* fpt, PDB *pdb){
      i++;
    }
    pdb->current->atom.z = atof(cz);
-   if(strstr(readLine,check2)!=NULL){
-    if(pdb->numCA != 0){
-     pdb->currentCA->nextCA = (recordPDB *)malloc(sizeof(recordPDB));
-     pdb->currentCA = pdb->currentCA->nextCA;
-    }
-    pdb->numCA++;
-    i=30;
-    for(j=0;j<=7;j++){
-      cx[j] = readLine[i];
-      i++;
-    }
-    for(j=0;j<=7;j++){
-      cy[j] = readLine[i];
-      i++;
-    }
-    for(j=0;j<=7;j++){
-      cz[j] = readLine[i];
-      i++;
-    }
-    pdb->currentCA->atom.x = atof(cx);
-    pdb->currentCA->atom.y = atof(cy);
-    pdb->currentCA->atom->atom.z = atof(cz);
-   }
-   // extension part
    i=17;
-   for(j=0;j<3;j++){ 
+   for(j=0;j<3;j++){
     pdb->current->atom.resName[j] = readLine[i];
     i++;
    }
@@ -88,13 +64,42 @@ void pdbRead(FILE* fpt, PDB *pdb){
    pdb->current->atom.occupancy = atof(occupancy);
    i=13;
    for(j=0;j<4;j++){
-    pdb->current->atom.atomName[j] = readLine[i]; 
+    pdb->current->atom.atomName[j] = readLine[i];
     i++;
    }
    i=77;
-   for(j=0;j<2;j++){ 
+   for(j=0;j<2;j++){
     pdb->current->atom.element[j] = readLine[i];
     i++;
+   }
+
+   if(strstr(readLine,check2)!=NULL){
+    if(pdb->numCA != 0){
+     pdb->currentCA->nextCA = (recordPDB *)malloc(sizeof(recordPDB));
+     pdb->currentCA = pdb->currentCA->nextCA;
+    }
+    pdb->numCA++;
+    pdb->currentCA->atom.x = atof(cx);
+    pdb->currentCA->atom.y = atof(cy);
+    pdb->currentCA->atom.z = atof(cz);
+    pdb->currentCA->atom.resNumber = atoi(resNumber);
+    pdb->currentCA->atom.tempFactor = atof(tempFactor);
+    pdb->currentCA->atom.occupancy = atof(occupancy);
+    i=17;
+    for(j=0;j<3;j++){
+     pdb->currentCA->atom.resName[j] = readLine[i];
+     i++;
+    }
+    i=13;
+    for(j=0;j<4;j++){
+     pdb->currentCA->atom.atomName[j] = readLine[i];
+     i++;
+    }
+    i=77;
+    for(j=0;j<2;j++){
+     pdb->currentCA->atom.element[j] = readLine[i];
+     i++;
+    }
    }
   }
  }
@@ -144,7 +149,6 @@ void arrayPDBRead(FILE* fpt, arrayPDB *pdb){
 */
     pdb->CA[a].x = atof(cx);
     pdb->CA[a].y = atof(cy);
-    //pdb->CA[a].z = atof(cz);
     a++;
    }
   }

@@ -1,6 +1,3 @@
-#include<stdio.h>
-#include<math.h>
-#include<string.h>
 #include<ctype.h>
 #include"PDB.h"
 
@@ -27,47 +24,47 @@ void lpdbWritebase(FILE* fpt,PDB* pdb){
   int countVAL=0;//20
   int countOTH=0;//それ以外
   for(pdb->currentCA=pdb->topCA;pdb->currentCA !=NULL;pdb->currentCA=pdb->currentCA->nextCA){
-    if(strcmp(pdb->currentCA->atom->resName,"ALA")==0){//動かなかったら ->resNameを.resNameに
+    if(strcmp(pdb->currentCA->atom.resName,"ALA")==0){//動かなかったら ->resNameを.resNameに
       countALA++;
-    }else if(strcmp(pdb->currentCA->atom->resName,"GLY")==0){//動かなかったら ->resNameを.resNameに
+    }else if(strcmp(pdb->currentCA->atom.resName,"GLY")==0){//動かなかったら ->resNameを.resNameに
       countGLY++;
-    }else if(strcmp(pdb->currentCA->atom->resName,"ARG")==0){//動かなかったら ->resNameを.resNameに
+    }else if(strcmp(pdb->currentCA->atom.resName,"ARG")==0){//動かなかったら ->resNameを.resNameに
       countARG++;
-    }else if(strcmp(pdb->currentCA->atom->resName,"ASN")==0){//動かなかったら ->resNameを.resNameに
+    }else if(strcmp(pdb->currentCA->atom.resName,"ASN")==0){//動かなかったら ->resNameを.resNameに
       countASN++;
-    }else if(strcmp(pdb->currentCA->atom->resName,"ASP")==0){//動かなかったら ->resNameを.resNameに
+    }else if(strcmp(pdb->currentCA->atom.resName,"ASP")==0){//動かなかったら ->resNameを.resNameに
       countASP++;
-    }else if(strcmp(pdb->currentCA->atom->resName,"CYS")==0){//動かなかったら ->resNameを.resNameに
+    }else if(strcmp(pdb->currentCA->atom.resName,"CYS")==0){//動かなかったら ->resNameを.resNameに
       countCYS++;
-    }else if(strcmp(pdb->currentCA->atom->resName,"GLN")==0){//動かなかったら ->resNameを.resNameに
+    }else if(strcmp(pdb->currentCA->atom.resName,"GLN")==0){//動かなかったら ->resNameを.resNameに
       countGLN++;
-    }else if(strcmp(pdb->currentCA->atom->resName,"GLU")==0){//動かなかったら ->resNameを.resNameに
+    }else if(strcmp(pdb->currentCA->atom.resName,"GLU")==0){//動かなかったら ->resNameを.resNameに
       countGLU++;
-    }else if(strcmp(pdb->currentCA->atom->resName,"HIS")==0){//動かなかったら ->resNameを.resNameに
+    }else if(strcmp(pdb->currentCA->atom.resName,"HIS")==0){//動かなかったら ->resNameを.resNameに
       countHIS++;
-    }else if(strcmp(pdb->currentCA->atom->resName,"ILE")==0){//動かなかったら ->resNameを.resNameに
+    }else if(strcmp(pdb->currentCA->atom.resName,"ILE")==0){//動かなかったら ->resNameを.resNameに
       countILE++;
-    }else if(strcmp(pdb->currentCA->atom->resName,"LEU")==0){//動かなかったら ->resNameを.resNameに
+    }else if(strcmp(pdb->currentCA->atom.resName,"LEU")==0){//動かなかったら ->resNameを.resNameに
       countLEU++;
-    }else if(strcmp(pdb->currentCA->atom->resName,"LYS")==0){//動かなかったら ->resNameを.resNameに
+    }else if(strcmp(pdb->currentCA->atom.resName,"LYS")==0){//動かなかったら ->resNameを.resNameに
       countLYS++;
-    }else if(strcmp(pdb->currentCA->atom->resName,"MET")==0){//動かなかったら ->resNameを.resNameに
+    }else if(strcmp(pdb->currentCA->atom.resName,"MET")==0){//動かなかったら ->resNameを.resNameに
       countMET++;
-    }else if(strcmp(pdb->currentCA->atom->resName,"PHE")==0){//動かなかったら ->resNameを.resNameに
+    }else if(strcmp(pdb->currentCA->atom.resName,"PHE")==0){//動かなかったら ->resNameを.resNameに
       countPHE++;
-    }else if(strcmp(pdb->currentCA->atom->resName,"PRO")==0){//動かなかったら ->resNameを.resNameに
+    }else if(strcmp(pdb->currentCA->atom.resName,"PRO")==0){//動かなかったら ->resNameを.resNameに
       countPRO++;
-    }else if(strcmp(pdb->currentCA->atom->resName,"SER")==0){//動かなかったら ->resNameを.resNameに
+    }else if(strcmp(pdb->currentCA->atom.resName,"SER")==0){//動かなかったら ->resNameを.resNameに
       countSER++;
-    }else if(strcmp(pdb->currentCA->atom->resName,"THR")==0){//動かなかったら ->resNameを.resNameに
+    }else if(strcmp(pdb->currentCA->atom.resName,"THR")==0){//動かなかったら ->resNameを.resNameに
       countTHR++;
-    }else if(strcmp(pdb->currentCA->atom->resName,"TRP")==0){//動かなかったら ->resNameを.resNameに
+    }else if(strcmp(pdb->currentCA->atom.resName,"TRP")==0){//動かなかったら ->resNameを.resNameに
       countTRP++;
-    }else if(strcmp(pdb->currentCA->atom->resName,"TYR")==0){//動かなかったら ->resNameを.resNameに
+    }else if(strcmp(pdb->currentCA->atom.resName,"TYR")==0){//動かなかったら ->resNameを.resNameに
       countTYR++;
-    }else if(strcmp(pdb->currentCA->atom->resName,"VAL")==0){//動かなかったら ->resNameを.resNameに
+    }else if(strcmp(pdb->currentCA->atom.resName,"VAL")==0){//動かなかったら ->resNameを.resNameに
       countVAL++;
-    }else if(strcmp(pdb->currentCA->atom->resName,"OTH")==0){//動かなかったら ->resNameを.resNameに
+    }else if(strcmp(pdb->currentCA->atom.resName,"OTH")==0){//動かなかったら ->resNameを.resNameに
       countOTH++;
     }
   }

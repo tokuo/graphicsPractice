@@ -1,15 +1,13 @@
-#include<stdio.h>
 #include "PDB.h"
 
-void min(PDB* pdb){
+void lpdbMinCalc(PDB* pdb){
 
-  pdb->current=pdb->bottom;
-  pdb->min.x=pdb->cyrrent->atom.x;
-  pdb->min.y=pdb->cyrrent->atom.y;
-  pdb->min.z=pdb->cyrrent->atom.z;
+  pdb->current=pdb->top;
+  pdb->min.x=pdb->current->atom.x;
+  pdb->min.y=pdb->current->atom.y;
+  pdb->min.z=pdb->current->atom.z;
 
-  while(pdb->current->nextArom!=NULL){
-    pdb->current=pdb->current->nextAtom;
+  while(pdb->current->nextAtom!=NULL){
     if(pdb->current->atom.x <pdb->min.x){
       pdb->min.x=pdb->current->atom.x;
     }
@@ -19,5 +17,6 @@ void min(PDB* pdb){
     if(pdb->current->atom.z <pdb->min.z){
       pdb->min.z=pdb->current->atom.z;
     }
+    pdb->current=pdb->current->nextAtom;
   }
 }

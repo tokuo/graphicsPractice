@@ -18,7 +18,8 @@ int main(int argc,char* argv[]){
     printf("write error\n");
     exit(1);
   }
-  lpdbWritebase(fpw,&pdb);
+  lpdbMaxCalc(&pdb);
+  fprintf(fpw,"center %8.3f %8.3f %8.3f\n",pdb.max.x,pdb.max.y,pdb.max.z);
   fclose(fpw);
   return 0;
 }

@@ -29,7 +29,7 @@ int main(int argc,char* argv[]){
     exit(1);
   }
   lpdbCenterCalc(&pdb);
-  fprintf(fpw,"center %8.3f %8.3f %8.3f\n"pdb->Center.x,pdb->Center.y,pdb->Center.z);
+  fprintf(fpw,"center %8.3f %8.3f %8.3f\n",pdb.Center.x,pdb.Center.y,pdb.Center.z);
   fclose(fpw);
   return 0;
 }
