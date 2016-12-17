@@ -1,0 +1,5 @@
+%! PS-Adobe-3.0
+10.000000 20.000000 moveto
+30.000000 40.000000 ineto
+stroke
+showpage
