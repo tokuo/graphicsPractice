@@ -13,8 +13,7 @@ OBJS=glut_my_key.c glut_my_mouse.c
 .o.exe:
 	gcc -g -Wall -o $*.exe $*.o  -lglut32 -lglu32 -lopengl32 -lm
 
-all: glut_sample glut_sample2 glut_sample3 glut_sample4
-win: glut_sample.exe glut_sample2.exe glut_sample3.exe glut_sample4.exe
+all: glut_sample glut_sample2 glut_sample3 glut_sample4 glut_sample5
 
 glut_sample: glut_sample.o
 	gcc -g -Wall -o $@ $@.o $(LIBS) 
@@ -27,6 +26,9 @@ glut_sample3: glut_sample3.o
 	
 glut_sample4: glut_sample4.o libmyGUI.a
 	gcc -g -Wall -o $@ $@.o $(LIBS) -L./ -lmyGUI  
+
+glut_sample5: glut_sample5.o libmyGUI.a
+	gcc -g -Wall -o $@ $@.o $(LIBS) -L./ -lmyGUI
 
 libmyGUI.a: $(OBJS:.c=.o)
 	ar r $@ $(OBJS:.c=.o) 
