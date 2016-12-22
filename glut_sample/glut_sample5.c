@@ -29,8 +29,7 @@ int     drag_mouse_r = 0; // 右ボタンがドラッグ中かどうかのフラ
 int     last_mouse_x, last_mouse_y; // 最後に記録されたマウスカーソルの座標
 
 // rotation control(ex3)
-int	movable = 0;
-int	turn = 1;
+int		movable = 1;
 float	velocity = 0;
  
 
