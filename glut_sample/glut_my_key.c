@@ -2,10 +2,6 @@
 #include <stdlib.h>
 #include "myGUI.h"
 
-
-//
-// Keyboard
-//
 void key(unsigned char c, int x, int y)
 {
 	switch(c) {
