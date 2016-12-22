@@ -28,6 +28,12 @@ int     drag_mouse_m = 0; // 中ボタンがドラッグ中かどうかのフラ
 int     drag_mouse_r = 0; // 右ボタンがドラッグ中かどうかのフラグ（1:ドラッグ中, 0:非ドラッグ中）
 int     last_mouse_x, last_mouse_y; // 最後に記録されたマウスカーソルの座標
 
+// rotation control(ex3)
+int	movable = 0;
+int	turn = 1;
+float	velocity = 0;
+ 
+
 // ウィンドウのサイズ
 int     win_width, win_height;
 
@@ -205,6 +211,7 @@ void  idle( void )
 {
 	// 物体を回転
 	theta += 0.3 * turn;
+	//theta = += movable*turn*velocity;
 
 	// 再描画の指示を出す（この後で再描画のコールバック関数が呼ばれる）
 	glutPostRedisplay();
