@@ -27,6 +27,12 @@ int     drag_mouse_l = 0; // 左ボタンがドラッグ中かどうかのフラ
 int     drag_mouse_m = 0; // 中ボタンがドラッグ中かどうかのフラグ（1:ドラッグ中, 0:非ドラッグ中）
 int     drag_mouse_r = 0; // 右ボタンがドラッグ中かどうかのフラグ（1:ドラッグ中, 0:非ドラッグ中）
 int     last_mouse_x, last_mouse_y; // 最後に記録されたマウスカーソルの座標
+int     beginx;
+
+// for makefile
+// rotation control(ex3)
+int		movable = 1;
+float	velocity = 1;
 
 // ウィンドウのサイズ
 int     win_width, win_height;

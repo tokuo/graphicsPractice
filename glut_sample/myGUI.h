@@ -1,5 +1,7 @@
 #ifndef MY_GUI_H
 #define MY_GUI_H
+#include <stdio.h>
+#include <stdlib.h>
 
 
 // GLUTヘッダファイルのインクルード
@@ -26,6 +28,11 @@ extern int     drag_mouse_m; // 中ボタンがドラッグ中かどうかのフ
 extern int     drag_mouse_r; // 右ボタンがドラッグ中かどうかのフラグ（1:ドラッグ中, 0:非ドラッグ中）
 extern int     last_mouse_x;
 extern int     last_mouse_y; // 最後に記録されたマウスカーソルの座標
+extern int     beginx;
+
+// rotation control(ex3)
+extern int		movable;
+extern float	velocity;
 
 // ウィンドウのサイズ
 extern int     win_width;

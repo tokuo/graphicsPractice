@@ -27,10 +27,11 @@ int     drag_mouse_l = 0; // 左ボタンがドラッグ中かどうかのフラ
 int     drag_mouse_m = 0; // 中ボタンがドラッグ中かどうかのフラグ（1:ドラッグ中, 0:非ドラッグ中）
 int     drag_mouse_r = 0; // 右ボタンがドラッグ中かどうかのフラグ（1:ドラッグ中, 0:非ドラッグ中）
 int     last_mouse_x, last_mouse_y; // 最後に記録されたマウスカーソルの座標
+int     beginx;
 
 // rotation control(ex3)
 int		movable = 1;
-float	velocity = 0;
+float	velocity = 1;
  
 
 // ウィンドウのサイズ
@@ -209,8 +210,8 @@ void  reshape( int w, int h )
 void  idle( void )
 {
 	// 物体を回転
-	theta += 0.3 * turn;
-	//theta = += movable*turn*velocity;
+	//theta += 0.3 * turn;
+	theta += movable*turn*velocity;
 
 	// 再描画の指示を出す（この後で再描画のコールバック関数が呼ばれる）
 	glutPostRedisplay();

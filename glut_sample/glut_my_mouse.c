@@ -5,22 +5,28 @@
 //
 void  mouse( int button, int state, int mx, int my )
 {
-    // 右ボタンがクリックされたらオブジェクトの回転方向を反転する
-    if ( ( button == GLUT_LEFT_BUTTON ) && ( state == GLUT_DOWN ) ) 
-        turn *= -1.0;
+    fprintf(stdout,"button:%d state:%d mouse_x:%d mouse_y:%d\n",button,state,mx,my);
+
+    // leftボタンがクリックされたらオブジェクトの回転方向を反転する
+    //if ( ( button == GLUT_LEFT_BUTTON ) && ( state == GLUT_DOWN ) ) 
+    //    turn *= -1.0;
 
     // 右ボタンが押されたらドラッグ開始
     if ( ( button == GLUT_RIGHT_BUTTON ) && ( state == GLUT_DOWN ) ) 
         drag_mouse_r = 1;
     // 右ボタンが離されたらドラッグ終了
-    else if ( ( button == GLUT_RIGHT_BUTTON ) && ( state == GLUT_UP ) ) 
+    else if ( ( button == GLUT_RIGHT_BUTTON ) && ( state == GLUT_UP ) )
         drag_mouse_r = 0;
 
 // left botton
     if ( ( button == GLUT_LEFT_BUTTON ) && ( state == GLUT_DOWN ) ){
+        beginx = mx;
         drag_mouse_l = 1;
     }
     else if ( ( button == GLUT_LEFT_BUTTON ) && ( state == GLUT_UP ) ){
+        if(movable == 0){
+            movable = 1;
+        }
         drag_mouse_l = 0;
     }
 
@@ -53,19 +59,15 @@ void  motion( int mx, int my )
         else if ( camera_pitch > 90.0 )
             camera_pitch = 90.0;
 
-// velocity control
-
-
-
         // 今回のマウス座標を記録
         last_mouse_x = mx; 
         last_mouse_y = my; 
     }
-    // left drag control to verosity
-/*
-    if (drg_mouse_l){
 
-    }   
-*/
+
+    // left drag control to verosity
+    if (drag_mouse_l){
+        velocity = (mx - beginx)/10;
+    }
 }
 
