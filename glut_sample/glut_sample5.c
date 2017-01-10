@@ -196,7 +196,7 @@ void  reshape( int w, int h )
     glLoadIdentity();
     gluPerspective( 45, (double)w/h, 1, 500 );
     //glOrtho(-5*w/h, 5*w/h, -5, 5, 1, 500);	
-    //gluLookAt(0, 0, camera_distance, 0, 0, 0, 0, 1, 0); 	
+    gluLookAt(0, 0, camera_distance, 0, 0, 0, 0, 1, 0); 	
 
     // ウィンドウのサイズを記録（テキスト描画処理のため）
 	win_width = w;
