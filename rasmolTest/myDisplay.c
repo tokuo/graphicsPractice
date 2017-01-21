@@ -120,7 +120,7 @@ myDisplayListMake2(void)
 		glColor3f(color[0], color[1], color[2]); /* 照明を考えないときの色 */	
 		// 頂点の設定
 		glVertex3f(__points[i].x, __points[i].y, __points[i].z);
-		for(i=1; i<POINTNUM-1; i++) {
+		for(i=1; i<POINTNUM; i++) {
 			__getColorRGB(color, i-0.5, 0, POINTNUM-1); 
 			glColor3f(color[0], color[1], color[2]);	
 			glVertex3f((__points[i].x + __points[i-1].x)/2.0,
@@ -133,15 +133,6 @@ myDisplayListMake2(void)
 				   __points[i].y,
 				   __points[i].z);
 		}
-		__getColorRGB(color, i, 0, POINTNUM-1);
-		glColor3f(color[0], color[1], color[2]);	
-		glVertex3f((__points[i].x + __points[i-1].x)/2.0,
-			   (__points[i].y + __points[i-1].y)/2.0,
-			   (__points[i].z + __points[i-1].z)/2.0);
-		glVertex3f(__points[i].x,
-			   __points[i].y,
-			   __points[i].z);
-
 	glEnd();
 	glPopMatrix();
 	glEndList();
