@@ -5,7 +5,7 @@
 .o.c:
 	cc -c $*.c -o $*.o
 
-all:pdbRead CenterCalc SizeCalc MinCalc MaxCalc InfoPrint Witebase CountElements
+all:pdbRead CenterCalc SizeCalc MinCalc MaxCalc InfoPrint Writebase CountElements
 
 pdbRead:pdbRead.c
 	cc -c $@.c
@@ -28,7 +28,7 @@ InfoPrint:pdbInfoPrint.o lpdbInfoPrint.o pdbRead.o
 Writebase:pdbWritebase.o lpdbWritebase.o pdbRead.o
 	cc pdb$@.o lpdb$@.o pdbRead.o -o pdb$@
 
-CountElements:pdbCountEleents.o lpdbCountElements.o pdbRead.o
+CountElements:pdbCountElements.o lpdbCountElements.o pdbRead.o
 	cc pdb$@.o lpdb$@.o pdbRead.o -o pdb$@
 
 test:out3 out4 out5 out6 out7 out9 out10
