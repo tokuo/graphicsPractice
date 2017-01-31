@@ -5,6 +5,8 @@
 
 static GLuint    displayList1          = 1;
 static GLuint    displayList2          = 2;
+static GLuint    displayList1_2        = 3;
+static GLuint    displayList2_2        = 4;
 static GLboolean needDisplayListMaking = GL_TRUE;
 
 static GLfloat materialColor[4];
@@ -12,6 +14,7 @@ static GLfloat materialSpecular[4] = {0.2, 0.2, 0.2, 1.0 } ;
 static GLfloat materialAmbient[4] = {0.1, 0.1, 0.1, 1.0 } ;
 
 extern PDB pdb;
+extern int flag_d;
 
 void __getColorRGB1(GLfloat color[3], char element[3]){
 	char check[5] = "CONHP";
@@ -82,6 +85,7 @@ void myDisplayListMake1(void){
 	GLint    stacks=10;
 
 	glNewList(displayList1, GL_COMPILE);
+	fprintf(stdout,"key:%d\n",flag_d);
 		for(pdb.current = pdb.top; pdb.current->nextAtom!=NULL; pdb.current = pdb.current->nextAtom) {
 			/* 色の設定 */
 			__getColorRGB1(color,pdb.current->atom.element);
@@ -120,10 +124,87 @@ void myDisplayListMake1(void){
 }
 
 
+void myDisplayListMake1_2(void){
+	GLfloat color[3]; 		/* 使用する色の指定 */
+	GLdouble radius=0.5;	        /* 作成する球面の半径 */	
+	GLint    slices=10;             /* 球面を分割するためのパラメータ */
+	GLint    stacks=10;
+
+	glNewList(displayList1_2, GL_COMPILE);
+	fprintf(stdout,"key:%d\n",flag_d);
+		for(pdb.current = pdb.top; pdb.current->nextAtom!=NULL; pdb.current = pdb.current->nextAtom) {
+			/* 色の設定 */
+			__getColorRGB2(color,pdb.current->atom.resName);
+			glColor3f(color[0], color[1], color[2]);              /* 照明がないときのための色 */
+			materialColor[0] = color[0];	materialColor[1] = color[1];	materialColor[2] = color[2];	
+			materialColor[3] = 1.0;
+			glMaterialfv(GL_FRONT, GL_SPECULAR, materialSpecular); /* 物質の鏡面反射の色の設定 */
+			glMaterialfv(GL_FRONT, GL_DIFFUSE, materialColor);     /* 物質の拡散光の色の設定  */
+			glMaterialf(GL_FRONT, GL_SHININESS, 10.0);             /* 物質の鏡面指数 */
+			glMaterialfv(GL_FRONT, GL_AMBIENT, materialAmbient);   /* 物質の環境光の色の設定 */
+	
+			/* 球面の創出 */
+			glPushMatrix();
+				//glScalef (1.0, 1.0, 1.0);                /* x, y, z軸に沿って、拡大縮小 */
+				glTranslatef(pdb.current->atom.x, pdb.current->atom.y, pdb.current->atom.z); /* 移動 */
+				glutSolidSphere(radius, slices, stacks);
+			glPopMatrix();
+		}
+		/* 色の設定 */
+			__getColorRGB2(color,pdb.current->atom.resName);
+			glColor3f(color[0], color[1], color[2]);              /* 照明がないときのための色 */
+			materialColor[0] = color[0];	materialColor[1] = color[1];	materialColor[2] = color[2];	
+			materialColor[3] = 1.0;
+			glMaterialfv(GL_FRONT, GL_SPECULAR, materialSpecular); /* 物質の鏡面反射の色の設定 */
+			glMaterialfv(GL_FRONT, GL_DIFFUSE, materialColor);     /* 物質の拡散光の色の設定  */
+			glMaterialf(GL_FRONT, GL_SHININESS, 10.0);             /* 物質の鏡面指数 */
+			glMaterialfv(GL_FRONT, GL_AMBIENT, materialAmbient);   /* 物質の環境光の色の設定 */
+	
+			/* 球面の創出 */
+			glPushMatrix();
+				//glScalef (1.0, 1.0, 1.0);                /* x, y, z軸に沿って、拡大縮小 */
+				glTranslatef(pdb.current->atom.x, pdb.current->atom.y, pdb.current->atom.z); /* 移動 */
+				glutSolidSphere(radius, slices, stacks);
+			glPopMatrix();
+	glEndList();
+}
+
+
 void myDisplayListMake2(void){
 	GLfloat color[3];
 
 	glNewList(displayList2, GL_COMPILE);
+	glPushMatrix();
+	glBegin(GL_LINE_STRIP);
+		// 色の設定
+		__getColorRGB1(color,pdb.top->atom.element);
+		glColor3f(color[0], color[1], color[2]); /* 照明を考えないときの色 */	
+		// 頂点の設定
+		glVertex3f(pdb.top->atom.x, pdb.top->atom.y, pdb.top->atom.z);
+		for(pdb.current = pdb.top; pdb.current->nextAtom!=NULL; pdb.current = pdb.current->nextAtom) {
+			__getColorRGB1(color,pdb.current->atom.element);
+			glColor3f(color[0], color[1], color[2]);	
+			glVertex3f((pdb.current->atom.x + pdb.current->nextAtom->atom.x)/2.0,
+				   (pdb.current->atom.y + pdb.current->nextAtom->atom.y)/2.0,
+				   (pdb.current->atom.z + pdb.current->nextAtom->atom.z)/2.0);
+
+			__getColorRGB1(color,pdb.current->nextAtom->atom.element);
+			glColor3f(color[0], color[1], color[2]);	
+			glVertex3f(pdb.current->nextAtom->atom.x,
+				   pdb.current->nextAtom->atom.y,
+				   pdb.current->nextAtom->atom.z);
+		}
+	glEnd();
+	glPopMatrix();
+	glEndList();
+
+}
+
+
+void myDisplayListMake2_2(void){
+	GLfloat color[3];
+
+	glNewList(displayList2_2, GL_COMPILE);
 	glPushMatrix();
 	glBegin(GL_LINE_STRIP);
 		// 色の設定
@@ -132,7 +213,7 @@ void myDisplayListMake2(void){
 		// 頂点の設定
 		glVertex3f(pdb.top->atom.x, pdb.top->atom.y, pdb.top->atom.z);
 		for(pdb.current = pdb.top; pdb.current->nextAtom!=NULL; pdb.current = pdb.current->nextAtom) {
-			__getColorRGB2(color,pdb.current->atom.resName); 
+			__getColorRGB2(color,pdb.current->atom.resName);
 			glColor3f(color[0], color[1], color[2]);	
 			glVertex3f((pdb.current->atom.x + pdb.current->nextAtom->atom.x)/2.0,
 				   (pdb.current->atom.y + pdb.current->nextAtom->atom.y)/2.0,
@@ -155,6 +236,8 @@ void myDisplayListMake2(void){
 void  myDisplayListMake(void){
 	myDisplayListMake1();
 	myDisplayListMake2();
+	myDisplayListMake1_2();
+	myDisplayListMake2_2();
 	needDisplayListMaking = GL_FALSE;
 }
 
@@ -182,6 +265,7 @@ void myDisplay(void){
 		myDisplayListMake();
 	}
 
+	if(flag_d == 1){
 	glPushMatrix();
 		//myLightSet();
 		glCallList(displayList1); /* ディスプレイリスト1を取り出す */
@@ -192,6 +276,20 @@ void myDisplay(void){
 		glCallList(displayList2); /* ディスプレイリスト2を取り出す */
 		glEnable(GL_LIGHTING);
 	glPopMatrix();
+	}
+
+	if(flag_d == 2){
+	glPushMatrix();
+		//myLightSet();
+		glCallList(displayList1_2); /* ディスプレイリスト1を取り出す */
+	glPopMatrix();
+
+	glPushMatrix();
+		glDisable(GL_LIGHTING);
+		glCallList(displayList2_2); /* ディスプレイリスト2を取り出す */
+		glEnable(GL_LIGHTING);
+	glPopMatrix();
+	}
 
 	 // ティーポットを描く
 	 glPushMatrix();

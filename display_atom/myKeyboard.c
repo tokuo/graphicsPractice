@@ -8,7 +8,7 @@ static int keyx = 0;
 static int keyy = 0;
 
 int s=0;//アニメーションを制御する変数
-int f=0;//表示方法切り替えを制御する変数
+int flag_d=1;//表示方法切り替えを制御する変数
 
 void
 myKeyboard(unsigned char key,  /* キーボードから打ち込まれた文字 */
@@ -54,11 +54,11 @@ myKeyboard0(unsigned char key,  /* キーボードから打ち込まれた文字
 		  }break;
 		}
 		case '1': {
-		    f=0;//表示方法1
+		    flag_d=1;//表示方法1
 		    break;
 		}
-	        case '2': {
-		    f=1;//表示方法2
+	  case '2': {
+		    flag_d=2;//表示方法2
 		    break;
 		}
 		  //キーボード機能の追加ここまで
